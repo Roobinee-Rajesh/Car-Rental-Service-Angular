@@ -1,0 +1,66 @@
+<section class="container pt-5 d-flex-column">
+  <h1 class="text-center pb-5">Welcome Admin!!!</h1>
+  <div class="d-flex justify-content-around">
+    <div
+      class="card shadow mb-3"
+      style="width: 18rem; background-color: #d9f99d"
+    >
+      <div class="card-body">
+        <h3 class="card-title font-weight-bold">Available Cars</h3>
+        <h4 class="card-subtitle mb-2 text-muted">{{ cars.length }}</h4>
+      </div>
+    </div>
+
+    <div
+      class="card shadow mb-3"
+      style="width: 18rem; background-color: #d9f99d"
+    >
+      <div class="card-body">
+        <h3 class="card-title">Cars Booked</h3>
+        <h4 class="card-subtitle mb-2 text-muted">{{ reservation.length }}</h4>
+      </div>
+    </div>
+
+    <div
+      class="card shadow mb-3"
+      style="width: 18rem; background-color: #d9f99d"
+    >
+      <div class="card-body">
+        <h3 class="card-title">Staffs Working</h3>
+        <h4 class="card-subtitle mb-2 text-muted">{{ staff.length }}</h4>
+      </div>
+    </div>
+  </div>
+  <h4 class="fw-bold mt-5">Bookings For This Month</h4>
+
+  <table class="table align-middle mb-0 bg-white mt-3">
+    <thead class="bg-light">
+      <tr class="table-header-custom">
+        <th>Reservation Date</th>
+        <th>Ride Start</th>
+        <th>Ride End</th>
+        <th>Car Model</th>
+        <th>Rental Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of reservation" class="table-body-custom">
+        <td>
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{ r.reservation_date }}</p>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ r.start_date }}</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ r.end_date }}</p>
+        </td>
+        <td>
+          {{ r.model_name }}
+        </td>
+        <td>{{ r.total_price }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

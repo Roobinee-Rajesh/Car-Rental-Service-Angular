@@ -1,0 +1,97 @@
+<section class="body">
+  <div class="bg-image h-100">
+    <div class="mask d-flex h-100">
+      <div class="container">
+        <div class="row">
+          <!-- Left Half -->
+          <div class="col-md-6">
+            <h3 class="fw-bold mb-5 mx-1 md-4 mt-4">UPCOMING BOOKING</h3>
+
+            <div class="card-body">
+              <div
+                class="row d-flex justify-content-between align-items-center ms-2 pt-2 mb-4"
+                style="background-color: #d9f99d"
+                *ngFor="let f of futureReservations"
+              >
+                <div class="col-2 text-center">
+                  <i class="fa-solid fa-car"></i>
+                </div>
+
+                <div class="col-4">
+                  <p class="lead fw-normal mb-2 fw-bold">{{ f.model_name }}</p>
+                  <p>
+                    <span class="text-muted">Price: </span
+                    ><b>₹ {{ f.total_price }} /-</b>
+                  </p>
+                </div>
+                <div class="col-4">
+                  <p>
+                    <span class="text-muted">From: </span
+                    ><b>{{ f.start_date }}</b>
+                  </p>
+                  <p>
+                    <span class="text-muted">To: </span><b>{{ f.end_date }}</b>
+                  </p>
+                </div>
+                <div class="col-2">
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm px-3"
+                    (click)="cancelReservation(f.id)"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <div class="d-flex justify-content-center">
+                <div *ngIf="futureReservations.length == 0" class="w-100 h-75">
+                  <ng-lottie [options]="empty"></ng-lottie>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Half -->
+          <div class="col-md-6">
+            <h3 class="fw-bold mb-5 mx-1 mx-md-4 mt-4">CURRENT BOOKING</h3>
+            <div class="card-body">
+              <div
+                class="row d-flex justify-content-between align-items-center ms-2 pt-2 mb-4"
+                style="background-color: #d9f99d"
+                *ngFor="let c of currentReservation"
+              >
+                <div class="col-2 text-center">
+                  <i class="fa-solid fa-car"></i>
+                </div>
+
+                <div class="col-4">
+                  <p class="lead fw-normal mb-2 fw-bold">{{ c.model_name }}</p>
+                  <p>
+                    <span class="text-muted">Price: </span
+                    ><b>₹ {{ c.total_price }} /-</b>
+                  </p>
+                </div>
+                <div class="col-4">
+                  <p>
+                    <span class="text-muted">From: </span
+                    ><b>{{ c.start_date }}</b>
+                  </p>
+                  <p>
+                    <span class="text-muted">To: </span><b>{{ c.end_date }}</b>
+                  </p>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <div class="d-flex justify-content-center">
+                <div *ngIf="currentReservation.length == 0" class="w-100 h-75">
+                  <ng-lottie [options]="empty"></ng-lottie>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

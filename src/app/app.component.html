@@ -1,0 +1,191 @@
+<!-- <div *ngIf="!isLoggedIn">
+  <router-outlet></router-outlet>
+</div> -->
+
+
+<!-- Home Navebar -->
+<div *ngIf="!isLoggedIn" class="container-fluid vh-100 d-flex flex-column">
+  <div class="row" *ngIf="currentRouteIsHome()">
+    <!-- Staff Navigation Bar -->
+    <header *ngIf="!(isLoggedIn && isStaff)" class="navbar sticky-top bg-primary p-2 shadow">
+      <div class="col-10">
+        <a class="navbar px-3" routerLink="/staff">
+          <img src="../../../assets/ecogo.png" class="logo" />
+        </a>
+      </div>
+    
+      <div class="navbar-nav px-4 text-white d-flex flex-column" [routerLink]="'/login'" role="button">
+       <i class="fa-solid fa-right-to-bracket"></i>
+      </div>
+    </header>
+  </div>
+  <div class="row flex-grow-1">
+    <main class="col-12 px-4">
+      <router-outlet></router-outlet>
+
+    </main>
+  </div>
+</div>
+
+
+
+<!-- Admin sidebar -->
+<div *ngIf="isLoggedIn && isAdmin" class="container-fluid vh-100">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="sidebar border border-right col-2 p-0 sideBarBg">
+      <div class="bg-body-tertiary vh-100 sideBarBg" tabindex="-1">
+        <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
+          <!-- Logo -->
+          <ul class="nav flex-column">
+            <li>
+              <a class="navbar pt-3" routerLink="/admin">
+                <img src="../../../assets/ecogo.png" class="logo" />
+              </a>
+            </li>
+            <!-- Sidebar items with icons -->
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem"
+                [routerLink]="['/admin']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fa-solid fa-house"></i>
+              <a class="nav-link d-flex align-items-center">Dashboard</a>
+            </li>
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem"
+                [routerLink]="['/admin/cars']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fa-solid fa-book"></i>
+              <a class="nav-link d-flex align-items-center">Car</a>
+            </li>
+            <li
+            class="nav-item d-flex align-items-center px-4 sideBarItem"
+            [routerLink]="['/admin/staff']"
+            routerLinkActive="sideBarActive"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i class="fa-solid fa-user"></i>
+            <a class="nav-link d-flex align-items-center">Staff</a>
+          </li>
+          <li
+            class="nav-item d-flex align-items-center px-4 sideBarItem"
+            [routerLink]="['/admin/maintenance']"
+            routerLinkActive="sideBarActive"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <a class="nav-link d-flex align-items-center">Maintenance</a>
+          </li>
+     
+            <!-- Logout -->
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem"
+                (click)="logout()"
+                routerLink=""
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <a class="nav-link d-flex align-items-center">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+
+
+<div
+  *ngIf="isLoggedIn && isStaff"
+  class="container-fluid vh-100 d-flex flex-column"
+>
+  <div class="row">
+    <!-- Staff Navigation Bar -->
+    <header class="navbar sticky-top bg-primary p-2 shadow">
+      <a class="navbar px-3" routerLink="/staff"
+        ><img src="../../../assets/ecogo.png" class="logo"
+      /></a>
+      <div class="navbar-nav px-4 text-white" (click)="logout()" role="button">
+        <i class="fa-solid  fa-right-from-bracket "></i>
+      </div>
+    </header>
+  </div>
+
+  <div class="row flex-grow-1">
+    <!-- Staff Main Content -->
+    <main class="col-12 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>
+
+<div
+  *ngIf="isLoggedIn && !isStaff && !isAdmin"
+  class="container-fluid vh-100 d-flex flex-column"
+>
+  <!-- logged-in User Navigation Bar -->
+  <div class="row">
+    <header class="navbar sticky-top bg-primary p-2 shadow">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <!-- Logo on the left -->
+        <a class="navbar mr-auto px-3 col-3" routerLink="/">
+          <img src="../../../assets/ecogo.png" class="logo" />
+        </a>
+
+        <!-- Menu items on the right -->
+        <div class="d-flex justify-content-end align-items-center col-lg-5 col-md-7">
+          <div
+            class="d-flex align-items-center ml-3 w-25"
+            routerLink="/user/profile"
+            style="cursor: pointer;"
+          >
+          <i class="fa-solid fa-user" style="color: #ffffff"></i>&nbsp;
+            <p class="mb-0 mr-2 text-white font-weight-bold font-size-x-large">
+              Profile
+            </p>
+            
+          </div>
+
+          <div
+            class="d-flex align-items-center w-25"
+            routerLink="/user/reservations"
+            style="cursor: pointer;"
+
+          >
+          <i class="fa-solid fa-book" style="color: #ffffff"></i>&nbsp;
+            <p class="mb-0 text-white font-weight-bold">Booking</p>
+            
+            
+          </div>
+
+          <!-- Logout icon at the end -->
+          <div
+            class="navbar-nav ml-3 text-white pt-1 pe-5"
+            (click)="logout()"
+            role="button"
+          >
+            <i class="fa-solid fa-solid fa-right-from-bracket text-white"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="row flex-grow-1">
+    <!-- logged-in User Main Content -->
+    <main class="col-12 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+
+<div *ngIf="loaderService.isLoading | async" class="loader">
+  <ng-lottie [options]="options"></ng-lottie>
+</div>
